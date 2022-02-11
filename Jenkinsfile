@@ -1,4 +1,4 @@
-peline {
+pipeline {
   environment {
     PROJECT = "gj-playground"
     APP_NAME = "hipster-adservice"
