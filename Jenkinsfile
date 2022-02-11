@@ -28,7 +28,7 @@ spec:
   stages {
     stage('Build and push image with Container Builder') {
       steps {
-        container(‘gcloud’) {
+        container('gcloud') {
           sh "gcloud auth list"
           sh "PYTHONUNBUFFERED=1 gcloud builds submit -t gcr.io/gj-playground/adservice ."
         }
