@@ -1,7 +1,7 @@
 pipeline {
   environment {
     PROJECT = "gj-playground"
-    APP_NAME = "hipster-adservice"
+    APP_NAME = "hipster-adservicetest_1"
     CLUSTER = "blibli-test"
     CLUSTER_ZONE = "us-central1-c"
     IMAGE_TAG = "gcr.io/gj-playground/adservice_test1"
@@ -30,7 +30,7 @@ spec:
       steps {
         container('gcloud') {
           sh "gcloud auth list"
-          sh "PYTHONUNBUFFERED=1 gcloud builds submit -t gcr.io/gj-playground/adservice_test1 ."
+          sh "PYTHONUNBUFFERED=1 gcloud builds submit --tag gcr.io/gj-playground/adservice_test1 ."
         }
       }
     }
