@@ -1,10 +1,10 @@
 pipeline {
   environment {
     PROJECT = "gj-playground"
-    APP_NAME = "hipster-adservicetest_1"
+    APP_NAME = "hipster-adservice"
     CLUSTER = "binary-authorization"
     CLUSTER_ZONE = "us-central1-c"
-    IMAGE_TAG = "gcr.io/gj-playground/adservice_test1"
+    IMAGE_TAG = "gcr.io/gj-playground/adservice"
   }
   agent {
     kubernetes {
@@ -30,7 +30,7 @@ spec:
       steps {
         container('gcloud') {
           sh "gcloud auth list"
-          sh "PYTHONUNBUFFERED=1 gcloud builds submit -t gcr.io/gj-playground/adservice_test1"
+          sh "PYTHONUNBUFFERED=1 gcloud builds submit -t gcr.io/gj-playground/adservice"
         }
       }
     }
