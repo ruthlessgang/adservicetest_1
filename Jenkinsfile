@@ -2,7 +2,7 @@ pipeline {
   environment {
     PROJECT = "gj-playground"
     APP_NAME = "hipster-adservicetest_1"
-    CLUSTER = "blibli-test"
+    CLUSTER = "binary-authorization"
     CLUSTER_ZONE = "us-central1-c"
     IMAGE_TAG = "gcr.io/gj-playground/adservice_test1"
   }
