@@ -30,7 +30,7 @@ spec:
       steps {
         container('gcloud') {
           sh "gcloud auth list"
-          sh "PYTHONUNBUFFERED=1 gcloud builds submit --tag gcr.io/gj-playground/adservice_test1"
+          sh "PYTHONUNBUFFERED=1 gcloud builds submit -t gcr.io/gj-playground/adservice_test1"
         }
       }
     }
