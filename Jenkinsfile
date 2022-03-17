@@ -4,7 +4,7 @@ pipeline {
     APP_NAME = "hipster-adservice"
     CLUSTER = "test-cluster"
     CLUSTER_ZONE = "us-central1-c"
-    IMAGE_TAG = "gcr.io/gj-playground/adservice"
+    IMAGE_TAG = "gcr.io/gj-playground/adservice_1"
   }
   agent {
     kubernetes {
@@ -30,7 +30,7 @@ spec:
       steps {
         container('gcloud') {
           sh "gcloud auth list"
-          sh "PYTHONUNBUFFERED=1 gcloud builds submit -t gcr.io/gj-playground/adservice ."
+          sh "PYTHONUNBUFFERED=1 gcloud builds submit -t gcr.io/gj-playground/adservice_1 ."
         }
       }
     }
