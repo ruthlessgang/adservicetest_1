@@ -2,37 +2,44 @@ pipeline {
   environment {
     PROJECT = "gj-playground"
     APP_NAME = "hipster-adservice"
-    CLUSTER = "test-cluster"
+    CLUSTER = "test-spinnaker"
     CLUSTER_ZONE = "us-central1-c"
-    IMAGE_TAG = "gcr.io/gj-playground/adservice_1"
+    IMAGE_TAG = "gcr.io/gj-playground/frontend-baseline"
+    JENKINS_CRED = "gj-playground"
   }
   agent {
     kubernetes {
+      defaultContainer 'jnlp'
       yaml """
 apiVersion: v1
 kind: Pod
 metadata:
+  name: kaniko
 labels:
   component: ci
 spec:
+  restartPolicy: Never
   containers:
-  - name: gcloud
-    image: gcr.io/google.com/cloudsdktool/cloud-sdk:latest
+  - name: kaniko
+    image: gcr.io/kaniko-project/executor:debug
     command:
     - cat
     tty: true
   
- """
+  """
 }
   }
   stages {
-    stage('Build and push image with Container Builder') {
+    stage('Bake') {
       steps {
-        container('gcloud') {
-          sh "gcloud auth list"
-          sh "PYTHONUNBUFFERED=1 gcloud builds submit -t gcr.io/gj-playground/adservice_1 ."
+        container('kaniko') {
+            sh '''
+            pwd
+            /kaniko/executor --dockerfile=./Dockerfile --context=./pwd --destination=gcr.io/gj-playground/frontend-baseline --destination=gcr.io/gj-playground/frontend-baseline 
+            '''
         }
       }
+      
+      }
     }
-  }
-} 
+}
