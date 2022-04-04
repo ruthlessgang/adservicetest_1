@@ -4,7 +4,7 @@ pipeline {
     APP_NAME = "hipster-adservice"
     CLUSTER = "test-spinnaker"
     CLUSTER_ZONE = "us-central1-c"
-    IMAGE_TAG = "gcr.io/gj-playground/frontend-baseline"
+    IMAGE_TAG = "gcr.io/gj-playground/adservicenew"
     JENKINS_CRED = "gj-playground"
   }
   agent {
@@ -35,7 +35,7 @@ spec:
         container('kaniko') {
             sh '''
             pwd
-            /kaniko/executor --dockerfile=./Dockerfile --context=./pwd --destination=gcr.io/gj-playground/frontend-baseline --destination=gcr.io/gj-playground/frontend-baseline 
+            /kaniko/executor --dockerfile=./Dockerfile --context=./pwd --destination=gcr.io/gj-playground/adservicenew --destination=gcr.io/gj-playground/adservicenew 
             '''
         }
       }
