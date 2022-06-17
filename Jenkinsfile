@@ -1,8 +1,7 @@
 pipeline {
   environment {
     PROJECT = "gj-playground"
-    APP_NAME = "hipster-adservice"
-    CLUSTER = "test-spinnaker"
+    CLUSTER = "cluster-1"
     CLUSTER_ZONE = "us-central1-c"
     IMAGE_TAG = "gcr.io/gj-playground/adservicenew"
     JENKINS_CRED = "gj-playground"
@@ -20,8 +19,8 @@ labels:
 spec:
   restartPolicy: Never
   containers:
-  - name: kaniko
-    image: gcr.io/kaniko-project/executor:debug
+  - name: gcloud
+    image: gcr.io/google.com/cloudsdktool/cloud-sdk:latest
     command:
     - cat
     tty: true
@@ -34,8 +33,8 @@ spec:
       steps {
         container('kaniko') {
             sh '''
-            pwd
-            /kaniko/executor --dockerfile=./Dockerfile --context=/home/jenkins/agent/workspace/adservicenew --destination=gcr.io/gj-playground/adservicenew --destination=gcr.io/gj-playground/adservicenew 
+            sh "gcloud auth list"
+            sh "PYTHONUNBUFFERED=1 gcloud builds submit -t  gcr.io/gj-playground/adservice . "
             '''
         }
       }
