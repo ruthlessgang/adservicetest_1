@@ -1,7 +1,7 @@
 pipeline {
   environment {
     PROJECT = "gj-playground"
-    CLUSTER = "cluster-1"
+    CLUSTER = "test"
     CLUSTER_ZONE = "us-central1-c"
     IMAGE_TAG = "gcr.io/gj-playground/adservicenew"
     JENKINS_CRED = "gj-playground"
@@ -13,7 +13,7 @@ pipeline {
 apiVersion: v1
 kind: Pod
 metadata:
-  name: kaniko
+  name: sample
 labels:
   component: ci
 spec:
@@ -31,7 +31,7 @@ spec:
   stages {
     stage('Bake') {
       steps {
-        container('kaniko') {
+        container('gcloud') {
             sh '''
             sh "gcloud auth list"
             sh "PYTHONUNBUFFERED=1 gcloud builds submit -t  gcr.io/gj-playground/adservice . "
