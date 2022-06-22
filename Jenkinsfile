@@ -3,7 +3,7 @@ pipeline {
     PROJECT = "gj-playground"
     CLUSTER = "test"
     CLUSTER_ZONE = "us-central1-c"
-    IMAGE_TAG = "gcr.io/gj-playground/adservicenew"
+    IMAGE_TAG = "gcr.io/gj-playground/adservice"
     JENKINS_CRED = "gj-playground"
   }
   agent {
@@ -20,7 +20,7 @@ spec:
   restartPolicy: Never
   containers:
   - name: gcloud
-    image: gcr.io/google.com/cloudsdktool/cloud-sdk:latest
+    image: gcr.io/google.com/cloudsdktool/cloud-sdk
     command:
     - cat
     tty: true
