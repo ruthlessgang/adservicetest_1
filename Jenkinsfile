@@ -20,7 +20,7 @@ spec:
   restartPolicy: Never
   containers:
   - name: gcloud
-    image: gcr.io/google.com/cloudsdktool/cloud-sdk
+    image: gcr.io/google.com/cloudsdktool/cloud-sdk:slim
     command:
     - cat
     tty: true
